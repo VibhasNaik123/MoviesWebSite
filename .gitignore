@@ -1,0 +1,6 @@
+.DS_Store
+MovieWebSite/MovieWebSite/bin/
+MovieWebSite/MoviesWebSite.Model/bin/
+MovieWebSite/MoviesWebSite.Manager/bin
+MovieWebSite/MoviesWebSite.Manager/obj
+MovieWebSite/.vs/

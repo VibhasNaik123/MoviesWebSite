@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MoviesWebSite.Model.Actor>
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <img src="@Url.Content(item._Image.ImagePath)" style="width:220px;height:190px" class="img-fluid img-thumbnail" alt="...">
+            </div>
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <tr><td colspan="2"><h2>@item._Name</h2></td></tr>
+                    <tr><td colspan="2">@item._Bio</td></tr>
+                    <tr><td>Gender : @item._Gender._Name</td><td>Date of Birth : @item._DateOfBirth.ToString("dd/MM/yyyy")</td></tr>
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item._Id }) 
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new { id = item._Id })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }

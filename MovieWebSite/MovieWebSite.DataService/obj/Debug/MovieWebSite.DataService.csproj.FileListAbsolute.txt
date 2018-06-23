@@ -1,0 +1,11 @@
+D:\Projects\Movies\MovieWebSite\MovieWebSite.DataService\bin\Debug\MovieWebSite.DataService.dll.config
+D:\Projects\Movies\MovieWebSite\MovieWebSite.DataService\bin\Debug\MovieWebSite.DataService.dll
+D:\Projects\Movies\MovieWebSite\MovieWebSite.DataService\bin\Debug\MovieWebSite.DataService.pdb
+D:\Projects\Movies\MovieWebSite\MovieWebSite.DataService\bin\Debug\EntityFramework.dll
+D:\Projects\Movies\MovieWebSite\MovieWebSite.DataService\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\Movies\MovieWebSite\MovieWebSite.DataService\bin\Debug\EntityFramework.xml
+D:\Projects\Movies\MovieWebSite\MovieWebSite.DataService\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\Movies\MovieWebSite\MovieWebSite.DataService\obj\Debug\MovieWebSite.DataService.csproj.CoreCompileInputs.cache
+D:\Projects\Movies\MovieWebSite\MovieWebSite.DataService\obj\Debug\MovieWebSite.DataService.dll
+D:\Projects\Movies\MovieWebSite\MovieWebSite.DataService\obj\Debug\MovieWebSite.DataService.pdb
+D:\Projects\Movies\MovieWebSite\MovieWebSite.DataService\obj\Debug\MovieWebSite.DataService.csprojResolveAssemblyReference.cache

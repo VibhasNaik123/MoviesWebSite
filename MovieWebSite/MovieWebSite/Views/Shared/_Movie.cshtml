@@ -1,0 +1,83 @@
+﻿@model MoviesWebSite.Model.Movie
+
+<div>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model._Name, "Movie Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model._Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model._Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model._YearOfRelease, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="input-group" style="width:280px">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar">
+                    </i>
+                </div>
+                @Html.EditorFor(model => model._YearOfRelease, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model._SelectedActors, "Actors", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.ListBoxFor(model => model._SelectedActors, ViewBag.Actors as List<SelectListItem>, htmlAttributes: new { @class = "multi-select" })
+            @Html.ValidationMessageFor(model => model._SelectedActors, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model._SelectedProducer, "Producers", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("_SelectedProducer", ViewBag.Producers as SelectList, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model._SelectedProducer, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model._Plot, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model._Plot, 10, 50, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model._Plot, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var date_input = $('input[name="_YearOfRelease"]'); //our date input has the name "date"
+        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            changeYear: true,
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years",
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            orientaion: "top auto",
+        })
+    })
+
+    $('.multi-select').multiselect();
+
+</script>
+

@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MoviesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblActorMovies">
+          <Key>
+            <PropertyRef Name="ActorMovieId" />
+          </Key>
+          <Property Name="ActorMovieId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActorId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="MovieId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="LastModifiedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblActors">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GenderId" Type="tinyint" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Bio" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="LastModifiedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="ImageId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblGender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenderName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GenderDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="LastModifiedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblImages">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ImageTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="LastModifedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblMovies">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MovieId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YearOfRelease" Type="int" Nullable="false" />
+          <Property Name="Plot" Type="text" Nullable="false" />
+          <Property Name="ProducerId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="LastModifiedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="ImageId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblProducers">
+          <Key>
+            <PropertyRef Name="ProducerId" />
+          </Key>
+          <Property Name="ProducerId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenderId" Type="tinyint" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="ProducerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bio" Type="text" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="LastModfiedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Actor_ActorMovie">
+          <End Role="tblActors" Type="Self.tblActors" Multiplicity="1" />
+          <End Role="tblActorMovies" Type="Self.tblActorMovies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblActors">
+              <PropertyRef Name="ActorId" />
+            </Principal>
+            <Dependent Role="tblActorMovies">
+              <PropertyRef Name="ActorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gender_Actor">
+          <End Role="tblGender" Type="Self.tblGender" Multiplicity="1" />
+          <End Role="tblActors" Type="Self.tblActors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="tblActors">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gender_Producer">
+          <End Role="tblGender" Type="Self.tblGender" Multiplicity="1" />
+          <End Role="tblProducers" Type="Self.tblProducers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="tblProducers">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Image_Actor">
+          <End Role="tblImages" Type="Self.tblImages" Multiplicity="1" />
+          <End Role="tblActors" Type="Self.tblActors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblImages">
+              <PropertyRef Name="ImageId" />
+            </Principal>
+            <Dependent Role="tblActors">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movie_Image">
+          <End Role="tblImages" Type="Self.tblImages" Multiplicity="1" />
+          <End Role="tblMovies" Type="Self.tblMovies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblImages">
+              <PropertyRef Name="ImageId" />
+            </Principal>
+            <Dependent Role="tblMovies">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movie_Producer">
+          <End Role="tblProducers" Type="Self.tblProducers" Multiplicity="1" />
+          <End Role="tblMovies" Type="Self.tblMovies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProducers">
+              <PropertyRef Name="ProducerId" />
+            </Principal>
+            <Dependent Role="tblMovies">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblActorMovies_tblMovies">
+          <End Role="tblMovies" Type="Self.tblMovies" Multiplicity="1" />
+          <End Role="tblActorMovies" Type="Self.tblActorMovies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMovies">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="tblActorMovies">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MoviesModelStoreContainer">
+          <EntitySet Name="tblActorMovies" EntityType="Self.tblActorMovies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblActors" EntityType="Self.tblActors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGender" EntityType="Self.tblGender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblImages" EntityType="Self.tblImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMovies" EntityType="Self.tblMovies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProducers" EntityType="Self.tblProducers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Actor_ActorMovie" Association="Self.FK_Actor_ActorMovie">
+            <End Role="tblActors" EntitySet="tblActors" />
+            <End Role="tblActorMovies" EntitySet="tblActorMovies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gender_Actor" Association="Self.FK_Gender_Actor">
+            <End Role="tblGender" EntitySet="tblGender" />
+            <End Role="tblActors" EntitySet="tblActors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gender_Producer" Association="Self.FK_Gender_Producer">
+            <End Role="tblGender" EntitySet="tblGender" />
+            <End Role="tblProducers" EntitySet="tblProducers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_Actor" Association="Self.FK_Image_Actor">
+            <End Role="tblImages" EntitySet="tblImages" />
+            <End Role="tblActors" EntitySet="tblActors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movie_Image" Association="Self.FK_Movie_Image">
+            <End Role="tblImages" EntitySet="tblImages" />
+            <End Role="tblMovies" EntitySet="tblMovies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movie_Producer" Association="Self.FK_Movie_Producer">
+            <End Role="tblProducers" EntitySet="tblProducers" />
+            <End Role="tblMovies" EntitySet="tblMovies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblActorMovies_tblMovies" Association="Self.FK_tblActorMovies_tblMovies">
+            <End Role="tblMovies" EntitySet="tblMovies" />
+            <End Role="tblActorMovies" EntitySet="tblActorMovies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MoviesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MoviesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblActorMovies" EntityType="MoviesModel.tblActorMovy" />
+          <EntitySet Name="tblActors" EntityType="MoviesModel.tblActor" />
+          <EntitySet Name="tblGenders" EntityType="MoviesModel.tblGender" />
+          <EntitySet Name="tblImages" EntityType="MoviesModel.tblImage" />
+          <EntitySet Name="tblMovies" EntityType="MoviesModel.tblMovy" />
+          <EntitySet Name="tblProducers" EntityType="MoviesModel.tblProducer" />
+          <AssociationSet Name="FK_Actor_ActorMovie" Association="MoviesModel.FK_Actor_ActorMovie">
+            <End Role="tblActor" EntitySet="tblActors" />
+            <End Role="tblActorMovy" EntitySet="tblActorMovies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblActorMovies_tblMovies" Association="MoviesModel.FK_tblActorMovies_tblMovies">
+            <End Role="tblMovy" EntitySet="tblMovies" />
+            <End Role="tblActorMovy" EntitySet="tblActorMovies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gender_Actor" Association="MoviesModel.FK_Gender_Actor">
+            <End Role="tblGender" EntitySet="tblGenders" />
+            <End Role="tblActor" EntitySet="tblActors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_Actor" Association="MoviesModel.FK_Image_Actor">
+            <End Role="tblImage" EntitySet="tblImages" />
+            <End Role="tblActor" EntitySet="tblActors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gender_Producer" Association="MoviesModel.FK_Gender_Producer">
+            <End Role="tblGender" EntitySet="tblGenders" />
+            <End Role="tblProducer" EntitySet="tblProducers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movie_Image" Association="MoviesModel.FK_Movie_Image">
+            <End Role="tblImage" EntitySet="tblImages" />
+            <End Role="tblMovy" EntitySet="tblMovies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movie_Producer" Association="MoviesModel.FK_Movie_Producer">
+            <End Role="tblProducer" EntitySet="tblProducers" />
+            <End Role="tblMovy" EntitySet="tblMovies" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblActorMovy">
+          <Key>
+            <PropertyRef Name="ActorMovieId" />
+          </Key>
+          <Property Name="ActorMovieId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActorId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="MovieId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CreatedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="LastModifiedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblActor" Relationship="MoviesModel.FK_Actor_ActorMovie" FromRole="tblActorMovy" ToRole="tblActor" />
+          <NavigationProperty Name="tblMovy" Relationship="MoviesModel.FK_tblActorMovies_tblMovies" FromRole="tblActorMovy" ToRole="tblMovy" />
+        </EntityType>
+        <EntityType Name="tblActor">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GenderId" Type="Byte" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Bio" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="LastModifiedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="ImageId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="tblActorMovies" Relationship="MoviesModel.FK_Actor_ActorMovie" FromRole="tblActor" ToRole="tblActorMovy" />
+          <NavigationProperty Name="tblGender" Relationship="MoviesModel.FK_Gender_Actor" FromRole="tblActor" ToRole="tblGender" />
+          <NavigationProperty Name="tblImage" Relationship="MoviesModel.FK_Image_Actor" FromRole="tblActor" ToRole="tblImage" />
+        </EntityType>
+        <EntityType Name="tblGender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenderName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GenderDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="LastModifiedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblActors" Relationship="MoviesModel.FK_Gender_Actor" FromRole="tblGender" ToRole="tblActor" />
+          <NavigationProperty Name="tblProducers" Relationship="MoviesModel.FK_Gender_Producer" FromRole="tblGender" ToRole="tblProducer" />
+        </EntityType>
+        <EntityType Name="tblImage">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImagePath" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ImageTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="LastModifedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblActors" Relationship="MoviesModel.FK_Image_Actor" FromRole="tblImage" ToRole="tblActor" />
+          <NavigationProperty Name="tblMovies" Relationship="MoviesModel.FK_Movie_Image" FromRole="tblImage" ToRole="tblMovy" />
+        </EntityType>
+        <EntityType Name="tblMovy">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MovieId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YearOfRelease" Type="Int32" Nullable="false" />
+          <Property Name="Plot" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProducerId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CreatedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="LastModifiedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="ImageId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="tblActorMovies" Relationship="MoviesModel.FK_tblActorMovies_tblMovies" FromRole="tblMovy" ToRole="tblActorMovy" />
+          <NavigationProperty Name="tblImage" Relationship="MoviesModel.FK_Movie_Image" FromRole="tblMovy" ToRole="tblImage" />
+          <NavigationProperty Name="tblProducer" Relationship="MoviesModel.FK_Movie_Producer" FromRole="tblMovy" ToRole="tblProducer" />
+        </EntityType>
+        <EntityType Name="tblProducer">
+          <Key>
+            <PropertyRef Name="ProducerId" />
+          </Key>
+          <Property Name="ProducerId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenderId" Type="Byte" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ProducerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bio" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="LastModfiedDateTime" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <NavigationProperty Name="tblGender" Relationship="MoviesModel.FK_Gender_Producer" FromRole="tblProducer" ToRole="tblGender" />
+          <NavigationProperty Name="tblMovies" Relationship="MoviesModel.FK_Movie_Producer" FromRole="tblProducer" ToRole="tblMovy" />
+        </EntityType>
+        <Association Name="FK_Actor_ActorMovie">
+          <End Type="MoviesModel.tblActor" Role="tblActor" Multiplicity="1" />
+          <End Type="MoviesModel.tblActorMovy" Role="tblActorMovy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblActor">
+              <PropertyRef Name="ActorId" />
+            </Principal>
+            <Dependent Role="tblActorMovy">
+              <PropertyRef Name="ActorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblActorMovies_tblMovies">
+          <End Type="MoviesModel.tblMovy" Role="tblMovy" Multiplicity="1" />
+          <End Type="MoviesModel.tblActorMovy" Role="tblActorMovy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMovy">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="tblActorMovy">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gender_Actor">
+          <End Type="MoviesModel.tblGender" Role="tblGender" Multiplicity="1" />
+          <End Type="MoviesModel.tblActor" Role="tblActor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="tblActor">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Image_Actor">
+          <End Type="MoviesModel.tblImage" Role="tblImage" Multiplicity="1" />
+          <End Type="MoviesModel.tblActor" Role="tblActor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblImage">
+              <PropertyRef Name="ImageId" />
+            </Principal>
+            <Dependent Role="tblActor">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gender_Producer">
+          <End Type="MoviesModel.tblGender" Role="tblGender" Multiplicity="1" />
+          <End Type="MoviesModel.tblProducer" Role="tblProducer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="tblProducer">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movie_Image">
+          <End Type="MoviesModel.tblImage" Role="tblImage" Multiplicity="1" />
+          <End Type="MoviesModel.tblMovy" Role="tblMovy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblImage">
+              <PropertyRef Name="ImageId" />
+            </Principal>
+            <Dependent Role="tblMovy">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movie_Producer">
+          <End Type="MoviesModel.tblProducer" Role="tblProducer" Multiplicity="1" />
+          <End Type="MoviesModel.tblMovy" Role="tblMovy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProducer">
+              <PropertyRef Name="ProducerId" />
+            </Principal>
+            <Dependent Role="tblMovy">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MoviesModelStoreContainer" CdmEntityContainer="MoviesEntities">
+          <EntitySetMapping Name="tblActorMovies">
+            <EntityTypeMapping TypeName="MoviesModel.tblActorMovy">
+              <MappingFragment StoreEntitySet="tblActorMovies">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+                <ScalarProperty Name="ActorMovieId" ColumnName="ActorMovieId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblActors">
+            <EntityTypeMapping TypeName="MoviesModel.tblActor">
+              <MappingFragment StoreEntitySet="tblActors">
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="ActorName" ColumnName="ActorName" />
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGenders">
+            <EntityTypeMapping TypeName="MoviesModel.tblGender">
+              <MappingFragment StoreEntitySet="tblGender">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="GenderDescription" ColumnName="GenderDescription" />
+                <ScalarProperty Name="GenderName" ColumnName="GenderName" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblImages">
+            <EntityTypeMapping TypeName="MoviesModel.tblImage">
+              <MappingFragment StoreEntitySet="tblImages">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastModifedDateTime" ColumnName="LastModifedDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ImageTitle" ColumnName="ImageTitle" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMovies">
+            <EntityTypeMapping TypeName="MoviesModel.tblMovy">
+              <MappingFragment StoreEntitySet="tblMovies">
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ProducerId" ColumnName="ProducerId" />
+                <ScalarProperty Name="Plot" ColumnName="Plot" />
+                <ScalarProperty Name="YearOfRelease" ColumnName="YearOfRelease" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProducers">
+            <EntityTypeMapping TypeName="MoviesModel.tblProducer">
+              <MappingFragment StoreEntitySet="tblProducers">
+                <ScalarProperty Name="LastModfiedDateTime" ColumnName="LastModfiedDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="ProducerName" ColumnName="ProducerName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="ProducerId" ColumnName="ProducerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

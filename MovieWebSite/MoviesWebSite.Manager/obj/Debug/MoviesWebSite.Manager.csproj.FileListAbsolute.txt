@@ -1,0 +1,16 @@
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\MoviesWebSite.Manager.dll.config
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\MoviesWebSite.Manager.dll
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\MoviesWebSite.Manager.pdb
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\EntityFramework.dll
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\MoviesWebSite.Model.dll
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\MovieWebSite.DataService.dll
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\MoviesWebSite.Model.pdb
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\MovieWebSite.DataService.pdb
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\MovieWebSite.DataService.dll.config
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\EntityFramework.xml
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\obj\Debug\MoviesWebSite.Manager.csprojResolveAssemblyReference.cache
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\obj\Debug\MoviesWebSite.Manager.csproj.CoreCompileInputs.cache
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\obj\Debug\MoviesWebSite.Manager.dll
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Manager\obj\Debug\MoviesWebSite.Manager.pdb

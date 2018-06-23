@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MoviesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblActorMovies">
+    <Key>
+      <PropertyRef Name="ActorMovieId" />
+    </Key>
+    <Property Name="ActorMovieId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActorId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="MovieId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+    <Property Name="LastModifiedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblActors">
+    <Key>
+      <PropertyRef Name="ActorId" />
+    </Key>
+    <Property Name="ActorId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GenderId" Type="tinyint" Nullable="false" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="Bio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+    <Property Name="LastModifiedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblGender">
+    <Key>
+      <PropertyRef Name="GenderId" />
+    </Key>
+    <Property Name="GenderId" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GenderName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GenderDescription" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+    <Property Name="LastModifiedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblMovies">
+    <Key>
+      <PropertyRef Name="MovieId" />
+    </Key>
+    <Property Name="MovieId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="YearOfRelease" Type="date" Nullable="false" />
+    <Property Name="Plot" Type="text" Nullable="false" />
+    <Property Name="PosterLocation" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProducerId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+    <Property Name="LastModifiedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblProducers">
+    <Key>
+      <PropertyRef Name="ProducerId" />
+    </Key>
+    <Property Name="ProducerId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GenderId" Type="tinyint" Nullable="false" />
+    <Property Name="ProducerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Bio" Type="text" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+    <Property Name="LastModfiedDateTime" Type="datetimeoffset" Precision="7" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Actor_ActorMovie">
+    <End Role="tblActors" Type="Self.tblActors" Multiplicity="1" />
+    <End Role="tblActorMovies" Type="Self.tblActorMovies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblActors">
+        <PropertyRef Name="ActorId" />
+      </Principal>
+      <Dependent Role="tblActorMovies">
+        <PropertyRef Name="ActorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gender_Actor">
+    <End Role="tblGender" Type="Self.tblGender" Multiplicity="1" />
+    <End Role="tblActors" Type="Self.tblActors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGender">
+        <PropertyRef Name="GenderId" />
+      </Principal>
+      <Dependent Role="tblActors">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gender_Producer">
+    <End Role="tblGender" Type="Self.tblGender" Multiplicity="1" />
+    <End Role="tblProducers" Type="Self.tblProducers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGender">
+        <PropertyRef Name="GenderId" />
+      </Principal>
+      <Dependent Role="tblProducers">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_ActorMovie">
+    <End Role="tblMovies" Type="Self.tblMovies" Multiplicity="1" />
+    <End Role="tblActorMovies" Type="Self.tblActorMovies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMovies">
+        <PropertyRef Name="MovieId" />
+      </Principal>
+      <Dependent Role="tblActorMovies">
+        <PropertyRef Name="MovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_Producer">
+    <End Role="tblProducers" Type="Self.tblProducers" Multiplicity="1" />
+    <End Role="tblMovies" Type="Self.tblMovies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProducers">
+        <PropertyRef Name="ProducerId" />
+      </Principal>
+      <Dependent Role="tblMovies">
+        <PropertyRef Name="ProducerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MoviesModelStoreContainer">
+    <EntitySet Name="tblActorMovies" EntityType="Self.tblActorMovies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblActors" EntityType="Self.tblActors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblGender" EntityType="Self.tblGender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMovies" EntityType="Self.tblMovies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProducers" EntityType="Self.tblProducers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Actor_ActorMovie" Association="Self.FK_Actor_ActorMovie">
+      <End Role="tblActors" EntitySet="tblActors" />
+      <End Role="tblActorMovies" EntitySet="tblActorMovies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gender_Actor" Association="Self.FK_Gender_Actor">
+      <End Role="tblGender" EntitySet="tblGender" />
+      <End Role="tblActors" EntitySet="tblActors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gender_Producer" Association="Self.FK_Gender_Producer">
+      <End Role="tblGender" EntitySet="tblGender" />
+      <End Role="tblProducers" EntitySet="tblProducers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_ActorMovie" Association="Self.FK_Movie_ActorMovie">
+      <End Role="tblMovies" EntitySet="tblMovies" />
+      <End Role="tblActorMovies" EntitySet="tblActorMovies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_Producer" Association="Self.FK_Movie_Producer">
+      <End Role="tblProducers" EntitySet="tblProducers" />
+      <End Role="tblMovies" EntitySet="tblMovies" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

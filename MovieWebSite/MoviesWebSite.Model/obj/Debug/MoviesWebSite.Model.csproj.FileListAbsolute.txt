@@ -1,0 +1,6 @@
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Model\bin\Debug\MoviesWebSite.Model.dll
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Model\bin\Debug\MoviesWebSite.Model.pdb
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Model\obj\Debug\MoviesWebSite.Model.csprojResolveAssemblyReference.cache
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Model\obj\Debug\MoviesWebSite.Model.csproj.CoreCompileInputs.cache
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Model\obj\Debug\MoviesWebSite.Model.dll
+D:\Projects\Movies\MovieWebSite\MoviesWebSite.Model\obj\Debug\MoviesWebSite.Model.pdb

@@ -1,0 +1,15 @@
+﻿@model MoviesWebSite.Model.Producer
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Producer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @*@Html.AntiForgeryToken()*@
+
+        <h2>Add Producer</h2>
+        <hr />
+        @Html.Partial("_Producer", Model)
+}
+

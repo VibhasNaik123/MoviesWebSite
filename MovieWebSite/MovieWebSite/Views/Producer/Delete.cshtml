@@ -1,0 +1,57 @@
+﻿@model MoviesWebSite.Model.Producer
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h2>Producer</h2>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model._Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model._Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model._DateOfBirth)
+        </dt>
+        <dd>
+            @Model._DateOfBirth.ToString("dd/MM/yyyy")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model._Bio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model._Bio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model._Gender._Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model._Gender._Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+
+
